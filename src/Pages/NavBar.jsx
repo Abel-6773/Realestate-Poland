@@ -21,7 +21,7 @@ export default function NavBar() {
               <p className="navbarListItemName">Explore</p>
             </li>
           </NavLink>
-          <NavLink to="sign-in">
+          <NavLink to="profile">
             <li>
               <PersonOutlineIcon />
               <p className="navbarListItemName">Profile</p>

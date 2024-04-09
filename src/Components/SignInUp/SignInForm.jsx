@@ -1,6 +1,8 @@
 import "./SignInForm.css";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
 import ArrowRightIcon from "../../assets/svg/keyboardArrowRightIcon.svg?react";
 let initialFormData = {
   email: "",
@@ -23,8 +25,33 @@ export default function SignInForm() {
     console.log(showPassword);
   };
 
+  const navigate = useNavigate();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = formData.email;
+    const password = formData.password;
+
+    try {
+      const auth = getAuth();
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredentials.user;
+      navigate("/profile");
+    } catch (error) {
+      const errorMessage = error.message;
+      const errorCode = error.code;
+      console.log(errorMessage, errorCode);
+      toast.error("error");
+    }
+  };
+
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input
         onChange={formUpdater}
         className="emailInput"

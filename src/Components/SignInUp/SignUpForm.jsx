@@ -1,13 +1,37 @@
 // import "./SignInForm.css";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { toast } from "react-toastify";
+import { initializeApp } from "firebase/app";
+
+import { getFirestore, serverTimestamp } from "firebase/firestore";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
+
 import ArrowRightIcon from "../../assets/svg/keyboardArrowRightIcon.svg?react";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAEkyyWBcoGyCOXmSlpuQloeh5X5VBuARs",
+  authDomain: "house-marketplace-250f0.firebaseapp.com",
+  projectId: "house-marketplace-250f0",
+  storageBucket: "house-marketplace-250f0.appspot.com",
+  messagingSenderId: "142016618213",
+  appId: "1:142016618213:web:2613cc6fa47ea4420a7e0c",
+  measurementId: "G-2KFYLKVY65",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 let initialFormData = {
   name: "",
   email: "",
   password: "",
 };
+
 export default function SignUpForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [showPassword, setShowPassword] = useState(false);
@@ -16,17 +40,51 @@ export default function SignUpForm() {
     setFormData((c) => {
       return { ...c, [e.target.name]: e.target.value };
     });
-    console.log(formData);
+    // console.log(formData);
   };
   const viewPassword = function () {
     setShowPassword((c) => {
       return !c;
     });
-    console.log(showPassword);
+    // console.log(showPassword);
+  };
+  const navigate = useNavigate();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    const auth = getAuth();
+    const name = formData.name;
+    const email = formData.email;
+    const password = formData.password;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const formDataCopy = { ...formData };
+      formDataCopy.timeStamp = serverTimestamp();
+      delete formDataCopy.password;
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      navigate("/");
+
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+      toast.error("error siging you up");
+    }
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       <input
         onChange={formUpdater}
         className="nameInput"
