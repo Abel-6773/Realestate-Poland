@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import homeIcon from "../assets/svg/homeIcon.svg";
+import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
 export default function Profile() {
   const auth = getAuth();
   const [changeDetails, setChangeDetails] = useState(false);
@@ -85,6 +88,11 @@ export default function Profile() {
               />
             </form>
           </div>
+          <NavLink to="/create-listing" className="createListing">
+            <img src={homeIcon} alt="home" />
+            <p>Sell or rent your home</p>
+            <img src={arrowRight} alt="arrow right" />
+          </NavLink>
         </section>
       </main>
     </div>

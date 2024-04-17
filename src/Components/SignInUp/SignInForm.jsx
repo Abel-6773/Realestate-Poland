@@ -77,7 +77,9 @@ export default function SignInForm() {
           alt=""
         />
       </div>
-      <NavLink className="forgotPasswordLink">Forgot Password</NavLink>
+      <NavLink to="../forgot-password" className="forgotPasswordLink">
+        Forgot Password
+      </NavLink>
       <div className="signInBar">
         <h2 className="signInText">Sign In</h2>
         <button className="signInButton">
