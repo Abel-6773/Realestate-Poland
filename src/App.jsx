@@ -14,6 +14,7 @@ import SignUp from "./Pages/SignUp";
 import PrivateRoutes from "./Pages/PrivateRoutes";
 import ForgotPass from "./Pages/ForgotPass";
 import Category from "./Pages/Category";
+import CreateListing from "./Pages/CreateListing";
 
 function App() {
   const router = createBrowserRouter(
@@ -29,6 +30,7 @@ function App() {
         </Route> */}
         <Route path="sign-up" element={<SignUp />} />
         <Route path="forgot-password" element={<ForgotPass />} />
+        <Route path="create-listing" element={<CreateListing />} />
       </Route>
     )
   );
