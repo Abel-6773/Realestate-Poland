@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import DeleteIcon from "../assets/svg/deleteIcon.svg?react";
-import bedIcon from "../assets/svg/bedIcon.svg";
-import bathtubIcon from "../assets/svg/bathtubIcon.svg";
+import DeleteIcon from "../../assets/svg/deleteIcon.svg?react";
+import bedIcon from "../../assets/svg/bedIcon.svg";
+import bathtubIcon from "../../assets/svg/bathtubIcon.svg";
 
 export default function ListingItem({ listing, id, onDelete }) {
   return (
@@ -11,7 +11,7 @@ export default function ListingItem({ listing, id, onDelete }) {
         className="categoryListingLink"
       >
         <img
-          src={listing.imageUrls[0]}
+          src={listing.imgUrls[0]}
           alt={listing.name}
           className="categoryListingImg"
         />

@@ -12,7 +12,7 @@ import {
 import { db } from "../firebase.config";
 import { toast } from "react-toastify";
 import Loading from "../Components/UI/Loading";
-import ListingItem from "./ListingItem";
+import ListingItem from "../Components/Category/ListingItem";
 
 export default function Category() {
   const [listings, setListings] = useState(null);
@@ -44,8 +44,6 @@ export default function Category() {
         });
         setListings(listings);
         setLoading(false);
-
-        console.log(listings);
       } catch (error) {
         console.log(error);
       }
@@ -63,22 +61,23 @@ export default function Category() {
             : "Places for sale"}
         </p>
       </header>
-
-      {loading ? (
-        <Loading />
-      ) : listings && listings.length > 0 ? (
-        listings.map((listing) => {
-          return (
-            <ListingItem
-              listing={listing.data}
-              id={listing.id}
-              key={listing.id}
-            />
-          );
-        })
-      ) : (
-        <p>No listing for {params.categoryName}</p>
-      )}
+      <main>
+        {loading ? (
+          <Loading />
+        ) : listings && listings.length > 0 ? (
+          listings.map((listing) => {
+            return (
+              <ListingItem
+                listing={listing.data}
+                id={listing.id}
+                key={listing.id}
+              />
+            );
+          })
+        ) : (
+          <p>There are currently no listing for {params.categoryName}</p>
+        )}
+      </main>
     </div>
   );
 }

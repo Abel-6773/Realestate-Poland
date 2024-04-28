@@ -15,6 +15,7 @@ import PrivateRoutes from "./Pages/PrivateRoutes";
 import ForgotPass from "./Pages/ForgotPass";
 import Category from "./Pages/Category";
 import CreateListing from "./Pages/CreateListing";
+import SingleListingPage from "./Pages/SingleListingPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,6 +23,10 @@ function App() {
       <Route path="/" element={<Root />}>
         <Route index element={<Explore />} />
         <Route path="category/:categoryName" element={<Category />} />
+        <Route
+          path="category/:categoryName/:listingID"
+          element={<SingleListingPage />}
+        />
         <Route path="offers" element={<Offers />} />
         <Route path="profile" element={<PrivateRoutes />} />
         <Route path="sign-in" element={<SignIn />} />
