@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import rentCategoryImage from "../assets/jpg/rentCategoryImage.jpg?react";
 import sellCategoryImage from "../assets/jpg/sellCategoryImage.jpg?react";
+import MultipleListingSlider from "../Components/Features/MultipleListingSlider";
 
 export default function Explore() {
   return (
@@ -10,6 +11,7 @@ export default function Explore() {
         <p className="pageHeader">Explore</p>
       </header>
       <main>
+        <MultipleListingSlider />
         <p className="exploreCategoryHeading">Categories</p>
         <div className="exploreCategories">
           <NavLink to="/category/rent">

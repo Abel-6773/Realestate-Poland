@@ -2,9 +2,21 @@ import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import Loading from "../Components/UI/Loading";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getAuth } from "firebase/auth";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import shareIcon from "../assets/svg/shareIcon.svg";
 import bathtubIcon from "../assets/svg/bathtubIcon.svg";
 
@@ -17,6 +29,8 @@ export default function SingleListingPage() {
   const params = useParams();
   const navigate = useNavigate();
   const auth = getAuth();
+  const swiperRef = useRef(null);
+  const swiperInstance = useRef(null);
 
   useEffect(() => {
     const getListing = async () => {
@@ -42,9 +56,41 @@ export default function SingleListingPage() {
   if (loading) {
     return <Loading />;
   }
-
   return (
     <main>
+      <Swiper
+        modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        className="mySwuiper"
+      >
+        {listing.imgUrls.map((image, idx) => {
+          return (
+            <SwiperSlide key={idx} style={{ height: "500px" }}>
+              <div
+                className="swiperSlideDiv"
+                style={{
+                  background: `url(${listing.imgUrls[idx]}) center no-repeat`,
+                  backgroundSize: "cover",
+                }}
+              ></div>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+      <div
+        style={{
+          backgroundImage: `url(${listing.imgUrls[0]})`,
+          width: "100%",
+          height: "100%",
+        }}
+      ></div>
       <div
         className="shareIconDiv"
         onClick={() => {
