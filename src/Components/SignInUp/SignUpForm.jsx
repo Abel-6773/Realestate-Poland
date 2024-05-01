@@ -7,25 +7,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
-import { initializeApp } from "firebase/app";
-
-import { getFirestore, serverTimestamp } from "firebase/firestore";
-import { doc, setDoc, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase.config";
+import { serverTimestamp } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 import ArrowRightIcon from "../../assets/svg/keyboardArrowRightIcon.svg?react";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAEkyyWBcoGyCOXmSlpuQloeh5X5VBuARs",
-  authDomain: "house-marketplace-250f0.firebaseapp.com",
-  projectId: "house-marketplace-250f0",
-  storageBucket: "house-marketplace-250f0.appspot.com",
-  messagingSenderId: "142016618213",
-  appId: "1:142016618213:web:2613cc6fa47ea4420a7e0c",
-  measurementId: "G-2KFYLKVY65",
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 let initialFormData = {
   name: "",
   email: "",
