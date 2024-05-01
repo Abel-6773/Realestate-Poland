@@ -37,7 +37,7 @@ export default function OAuth() {
       <button className="socialIconDiv" onClick={onClick}>
         <img
           className="socialIconImg"
-          src="src\assets\svg\googleIcon.svg"
+          src="public\assets\svg\googleIcon.svg"
           alt=""
         />
       </button>
