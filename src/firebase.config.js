@@ -3,7 +3,7 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAEkyyWBcoGyCOXmSlpuQloeh5X5VBuARs",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "house-marketplace-250f0.firebaseapp.com",
   projectId: "house-marketplace-250f0",
   storageBucket: "house-marketplace-250f0.appspot.com",

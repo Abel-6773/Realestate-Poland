@@ -253,7 +253,7 @@ export default function CreateListing() {
             onChange={onMutate}
             maxLength="32"
             minLength="10"
-            // required
+            required
           />
 
           <div className="formRooms flex">
@@ -377,8 +377,8 @@ export default function CreateListing() {
               id="regularPrice"
               value={regularPrice}
               onChange={onMutate}
-              // min="50"
-              // max="750000000"
+              min="50"
+              max="750000000"
               required
             />
             {type === "rent" && <p className="formPriceText">$ / Month</p>}
@@ -412,7 +412,7 @@ export default function CreateListing() {
             max="6"
             accept=".jpg,.png,.jpeg"
             multiple
-            // required
+            required
           />
           <button type="submit" className="primaryButton createListingButton">
             Create Listing
