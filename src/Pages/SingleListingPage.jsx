@@ -77,7 +77,7 @@ export default function SingleListingPage() {
                 className="swiperSlideDiv"
                 style={{
                   background: `url(${listing.imgUrls[idx]}) center no-repeat`,
-                  backgroundSize: "cover",
+                  backgroundSize: "50%",
                 }}
               ></div>
             </SwiperSlide>

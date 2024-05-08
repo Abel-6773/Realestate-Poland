@@ -34,7 +34,7 @@ export default function Category() {
           listingRef,
           where("type", "==", params.categoryName),
           orderBy("timestamp", "desc"),
-          limit(1)
+          limit(10)
         );
 
         //execute query
@@ -67,7 +67,7 @@ export default function Category() {
         where("type", "==", params.categoryName),
         orderBy("timestamp", "desc"),
         startAfter(lastFetchedListing),
-        limit(1)
+        limit(10)
       );
 
       //execute query
